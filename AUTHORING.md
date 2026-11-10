@@ -32,4 +32,4 @@ These exist because the ChatGPT plugin connects to `https://mcp.roboflow.com/ope
 
 - Never put an API key in a URL or a command argument. Read it from the `ROBOFLOW_API_KEY` environment variable.
 - Ask the user before uploading data in bulk, starting paid jobs, deleting data, or changing shared settings.
-- Don't name tools that don't exist. Check the tool name against the MCP server before writing it.
+- Don't name tools that don't exist. Check the tool name against the MCP server before writing it. Use the full tool name (`workflow_evals_cases_create`, not `cases_create`). `python3 checks/check_tool_names.py` lists names in `skills/` and `chatgpt/skills/` that are not in the pinned tool catalog; add identifiers that only look like tools (SDK arguments, Workflow block inputs) to `checks/not-tools.txt`.

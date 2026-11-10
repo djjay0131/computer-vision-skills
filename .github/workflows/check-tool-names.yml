@@ -1,0 +1,36 @@
+name: Check MCP tool names in skills
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - "chatgpt/skills/**"
+      - "checks/**"
+      - "cowork/catalog.json"
+      - ".github/workflows/check-tool-names.yml"
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "chatgpt/skills/**"
+      - "checks/**"
+      - "cowork/catalog.json"
+      - ".github/workflows/check-tool-names.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Test the checker
+        run: python -m unittest discover -s checks -p "test_*.py"
+      # Warns instead of failing while the pinned catalog in cowork/catalog.json can lag
+      # the live server. Add --strict once the pin tracks the server.
+      - name: Check tool names against the pinned catalog
+        run: python checks/check_tool_names.py --github

@@ -1,0 +1,9 @@
+# Backticked identifiers in skills that share a prefix with an MCP tool but are not
+# tools: SDK and REST parameters, response fields, and similar. One per line.
+api_key
+api_url
+workspace_name
+batch_size
+image_and_json
+get_batch_job_metadata  # inference_cli Python function, not an MCP tool
+class_list  # Workflow block input
